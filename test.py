@@ -15,3 +15,13 @@ flask = "Flaskは小規模アプリ開発にむいているFW"
 
 # 管理者権限を元に戻すときは下記コードでセキュリティーを戻す
 # Set-ExecutionPolicy Restricted -Scope CurrentUser
+
+#flaskを動かすコマンド
+# venv\Scripts\Activate
+
+# flaskを実行するコマンド（PowerShell）
+# １．$env:FLASK_APP = "app.py"
+# 2.flask run
+
+# (ディレクトリ)/templatesフォルダの中にhtmlフォルダを置く（CSSもあり？）
+# render_templateでフォルダを読み込む
