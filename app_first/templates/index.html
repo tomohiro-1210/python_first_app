@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask {{ name }}</title>
+</head>
+<body>
+    <header id="header">{{ name }}</header>
+    <div class="content content1"></div>
+    {% for test_message in list %}
+    <div class="content content2">
+            <p>{{ test_message }}</p>
+    </div>
+    {% endfor %}
+    <div class="content content3"></div>
+    <footer id="footer">フッター</footer>
+    <style>
+            #header{
+                font-size: 30px;
+                font-weight: bold;
+                padding: 20px 0;
+                text-align: center;
+                width: 100vw;
+            }
+            .content{
+                width: 100vw;
+                height: 100vh;
+            }
+            .content1{
+                background-color: blue;
+            }
+            .content2{
+                background-color: red;
+                color: white;
+                font-size: 50px;
+                text-align: center;
+                line-height: 100vh;
+            }
+            .content3{
+                background-color: yellow;
+            }
+            #footer{
+                font-size: 30px;
+                font-weight: bold;
+                padding: 20px 0;
+                text-align: center;
+                width: 100vw;
+            }
+
+    </style>
+</body>
+</html>
