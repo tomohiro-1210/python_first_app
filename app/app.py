@@ -1,7 +1,7 @@
 from flask import Flask , render_template,g,redirect,request #render_templateはフォルダの読み込みに必要
 import sqlite3
 DATABASE="flaskmemo2.db"
-from flask_login import UserMixin,LoginManager,login_required,login_user
+from flask_login import UserMixin,LoginManager,login_required,login_user,logout_user
 import os
 
 # ログイン機能
@@ -10,6 +10,7 @@ app.secret_key = os.urandom(24)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+#ログイン
 class User(UserMixin):
     def __init__(self,userid):
         self.id = userid
@@ -40,6 +41,12 @@ def login():
             error_message = 'ログインIDとパスワードが間違っています。'
 
     return render_template('login.html', userid=userid, error_message=error_message)
+
+#ログアウトへのルート
+@app.route('/logout', methods=['GET'])
+def logout():
+    logout_user()
+    return redirect('/login')
 
 # 127・・・/<name>でURLを入力したとき関数で返せるようにする
 @app.route("/")
