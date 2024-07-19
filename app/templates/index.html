@@ -5,18 +5,36 @@
     {% if memo_list == [] %}
         <p>メモは存在しません</p>
     {% else %}
+        <a href="/regist" class="register-button">新規登録</a>
         <table border="2">
             <tr>
                 <th>タイトル</th>
                 <th>メモ</th>
+                <th></th>
             </tr>
             {% for memo in memo_list %}
                 <tr>
                     <td class="content-title">{{ memo.title }}</td>
                     <td class="content-text">{{ memo.body }}</td>
+                    <td><a href="/{{memo.id}}/edit" role="button">編集</a></td>
                 </tr>
             {% endfor %}
 
         </table>
+        <style>
+            .register-button{
+                padding: 10px 15px;
+                background-color: blue;
+                color: white;
+                border: solid 1px blue;
+                transition: all 0.3s;
+                display: inline-block;
+                margin-bottom: 20px;
+            }
+            .register-button:hover{
+                background-color: white;
+                color: blue;
+            }
+        </style>
     {% endif %}
 {% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+<!-- block content~endblockの中にコンテンツを書いていく -->
+{% block content %}
+<h1 class="top-title">新規登録</h1>
+    <form method="POST">
+        <table border="2">
+            <tr>
+                <th>タイトル</th>
+                <th>メモ</th>
+            </tr>
+            <tr>
+                <td class="content-title"><input type="text" name="title"></td>
+                <td class="content-title"><input type="text" name="body"></td>
+            </tr>
+        </table>
+        <input type="submit" value="新規登録">
+    </form>
+    <a href="/" role="button">一覧に戻る</a>
+{% endblock %}
