@@ -25,3 +25,6 @@ flask = "Flaskは小規模アプリ開発にむいているFW"
 
 # (ディレクトリ)/templatesフォルダの中にhtmlフォルダを置く（CSSもあり？）
 # render_templateでフォルダを読み込む
+
+#flask_loginインストール
+#pip install falsk-login
