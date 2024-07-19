@@ -1,53 +1,22 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask {{ name }}</title>
-</head>
-<body>
-    <header id="header">{{ name }}</header>
-    <div class="content content1"></div>
-    {% for test_message in list %}
-    <div class="content content2">
-            <p>{{ test_message }}</p>
-    </div>
-    {% endfor %}
-    <div class="content content3"></div>
-    <footer id="footer">フッター</footer>
-    <style>
-            #header{
-                font-size: 30px;
-                font-weight: bold;
-                padding: 20px 0;
-                text-align: center;
-                width: 100vw;
-            }
-            .content{
-                width: 100vw;
-                height: 100vh;
-            }
-            .content1{
-                background-color: blue;
-            }
-            .content2{
-                background-color: red;
-                color: white;
-                font-size: 50px;
-                text-align: center;
-                line-height: 100vh;
-            }
-            .content3{
-                background-color: yellow;
-            }
-            #footer{
-                font-size: 30px;
-                font-weight: bold;
-                padding: 20px 0;
-                text-align: center;
-                width: 100vw;
-            }
+{% extends "base.html" %}
+<!-- block content~endblockの中にコンテンツを書いていく -->
+{% block content %}
+<h1 class="top-title">メモアプリ</h1>
+    {% if memo_list == [] %}
+        <p>メモは存在しません</p>
+    {% else %}
+        <table border="2">
+            <tr>
+                <th>タイトル</th>
+                <th>メモ</th>
+            </tr>
+            {% for memo in memo_list %}
+                <tr>
+                    <td class="content-title">{{ memo.title }}</td>
+                    <td class="content-text">{{ memo.body }}</td>
+                </tr>
+            {% endfor %}
 
-    </style>
-</body>
-</html>
+        </table>
+    {% endif %}
+{% endblock %}
