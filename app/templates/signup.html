@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 <!-- block content~endblockの中にコンテンツを書いていく -->
 {% block content %}
-<h1 class="top-title">ログイン画面</h1>
+<h1 class="top-title">新規ユーザー登録</h1>
 <!-- エラーメッセージ -->
  <p style="color: red; font-weight: bold;">{{ error_message }}</p>
 
@@ -17,7 +17,7 @@
                 <td class="content-title"><input type="password" name="password"></td>
             </tr>
         </table>
-        <input type="submit" value="ログイン">
+        <input type="submit" value="ユーザー登録">
     </form>
-    <a href="/signup" role="button">ユーザー登録をする</a>
+    <a href="/login" role="button">ログイン画面に戻る</a>
 {% endblock %}

@@ -3,6 +3,7 @@ import sqlite3
 DATABASE="flaskmemo2.db"
 from flask_login import UserMixin,LoginManager,login_required,login_user,logout_user
 import os
+from werkzeug.security import generate_password_hash,check_password_hash
 
 # ログイン機能
 app = Flask(__name__)
@@ -33,11 +34,16 @@ def login():
         userid = request.form.get('userid')
         password = request.form.get('password')
         #ログインチェック
-        if(userid == 'mimic' and password == '1234'):
-            user = User(userid)
-            login_user(user)
-            return redirect('/')
-        else:
+        user_data = get_db().execute(
+            "select password from user where userid=?", [userid,]
+        ).fetchone()
+
+        if user_data is not None:
+            if check_password_hash(user_data[0],password):
+                user = User(userid)
+                login_user(user)
+                return redirect('/')
+            
             error_message = 'ログインIDとパスワードが間違っています。'
 
     return render_template('login.html', userid=userid, error_message=error_message)
@@ -47,6 +53,32 @@ def login():
 def logout():
     logout_user()
     return redirect('/login')
+
+#新規登録
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    error_message = ""
+
+    if request.method == 'POST':
+        userid = request.form.get('userid')
+        password = request.form.get('password')
+        pw_hash = generate_password_hash(password, method='pbkdf2:sha256')
+
+        #DB登録
+        db = get_db()
+        user_check = get_db().execute("select userid from user where userid=?", [userid,]).fetchall()
+        if not user_check:
+            db.execute(
+                "insert into user (userid, password) values (?, ?)", 
+                (userid, pw_hash)
+            )
+            db.commit()
+            return redirect('/login')
+        else:
+            error_message = "入力されたユーザーidは既に登録されています。"
+
+
+    return render_template('signup.html')
 
 # 127・・・/<name>でURLを入力したとき関数で返せるようにする
 @app.route("/")
