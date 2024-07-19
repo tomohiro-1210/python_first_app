@@ -45,6 +45,22 @@ def edit(id):
     ).fetchone()
     return render_template('edit.html',post=post)
 
+#削除画面
+@app.route("/<id>/delete", methods=["GET", "POST"])
+def delete(id):
+    if request.method == "POST":
+        db = get_db() #DBの情報ゲット
+        db.execute("delete from memo where id=?", [id,]) #DBに情報を挿入
+        db.commit() #実行
+        return redirect('/')
+    #DBに登録
+    
+    post = get_db().execute(
+        "select id,title,body from memo where id=?" , (id,)
+    )
+    
+    return render_template('delete.html', post=post)
+
 #DBへアクセス
 def connect_db():
     rv = sqlite3.connect(DATABASE)
